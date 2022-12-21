@@ -1,6 +1,31 @@
 import "../login//login.scss";
+import { useState } from "react";
+import axios from "axios";
 
 const Register = ({ setRegisteredClicked }) => {
+  const [values, setValues] = useState({
+    userName: "",
+    password: "",
+    repeatPassword: "",
+    adminPassword: "",
+  });
+
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const { userName, password, repeatPassword, adminPassword } = values;
+    if (password !== repeatPassword) return;
+    const { data } = await axios.post("/api/v1/auth/register", {
+      userName,
+      password,
+      adminPassword,
+    });
+    console.log(data);
+  };
+
   return (
     <>
       <form className="login__form">
@@ -8,8 +33,9 @@ const Register = ({ setRegisteredClicked }) => {
         <input
           type="text"
           className="login__form-input"
-          name="name"
+          name="userName"
           placeholder="שם משתמש"
+          onChange={handleChange}
         />
 
         <input
@@ -17,24 +43,31 @@ const Register = ({ setRegisteredClicked }) => {
           className="login__form-input"
           name="password"
           placeholder="סיסמא"
+          onChange={handleChange}
         />
 
         <input
           type="password"
           className="login__form-input"
-          name="repeat_password"
+          name="repeatPassword"
           placeholder="ודא סיסמא"
+          onChange={handleChange}
         />
 
         <input
           type="password"
           className="login__form-input"
-          name="admin_password"
+          name="adminPassword"
           placeholder="סיסמת מנהל"
+          onChange={handleChange}
         />
 
         <div className="login__form-buttons_container">
-          <button type="submit" className="login__form-btn btn">
+          <button
+            type="submit"
+            className="login__form-btn btn"
+            onClick={onSubmit}
+          >
             שלח
           </button>
           <button
