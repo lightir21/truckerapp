@@ -10,7 +10,6 @@ const Login = ({ setLogin }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/");
   };
 
   return (

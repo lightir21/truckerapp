@@ -1,8 +1,11 @@
 import "../login//login.scss";
 import { useState } from "react";
 import axios from "axios";
+import { useUserStore } from "../../store/user-store";
 
 const Register = ({ setRegisteredClicked }) => {
+  const { signIn, signUp, userData, setUser } = useUserStore((state) => state);
+  console.log(userData);
   const [values, setValues] = useState({
     userName: "",
     password: "",
@@ -14,21 +17,9 @@ const Register = ({ setRegisteredClicked }) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    const { userName, password, repeatPassword, adminPassword } = values;
-    if (password !== repeatPassword) return;
-    const { data } = await axios.post("/api/v1/auth/register", {
-      userName,
-      password,
-      adminPassword,
-    });
-    console.log(data);
-  };
-
   return (
     <>
-      <form className="login__form">
+      <div className="login__form">
         <h2>הרשמה</h2>
         <input
           type="text"
@@ -66,7 +57,7 @@ const Register = ({ setRegisteredClicked }) => {
           <button
             type="submit"
             className="login__form-btn btn"
-            onClick={onSubmit}
+            onClick={() => signUp(values)}
           >
             שלח
           </button>
@@ -78,7 +69,7 @@ const Register = ({ setRegisteredClicked }) => {
             חזרה
           </button>
         </div>
-      </form>
+      </div>
     </>
   );
 };

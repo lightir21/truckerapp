@@ -1,10 +1,22 @@
 import React, { useState } from "react";
-
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Login } from "../../components/";
+import { useUserStore } from "../../store/user-store";
 import "./landingPage.scss";
 
 const LandingPage = ({ setLogin }) => {
   const [enterClicked, setEnterClicked] = useState(false);
+
+  const { userData } = useUserStore((state) => state);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userData.user) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <div className="landingPage">
