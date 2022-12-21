@@ -2,14 +2,27 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Register } from "../";
+import { useUserStore } from "../../store/user-store";
 import "./login.scss";
 
 const Login = ({ setLogin }) => {
   const [registerClicked, setRegisteredClicked] = useState(false);
+  const [values, setValues] = useState({
+    userName: "",
+    password: "",
+  });
+
+  const { signIn } = useUserStore((state) => state);
+
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    signIn(values);
   };
 
   return (
@@ -22,8 +35,9 @@ const Login = ({ setLogin }) => {
           <input
             type="text"
             className="login__form-input"
-            name="name"
+            name="userName"
             placeholder="שם משתמש"
+            onChange={handleChange}
           />
 
           <input
@@ -31,6 +45,7 @@ const Login = ({ setLogin }) => {
             className="login__form-input"
             name="password"
             placeholder="סיסמא"
+            onChange={handleChange}
           />
           <div className="login__form-buttons_container">
             <button
