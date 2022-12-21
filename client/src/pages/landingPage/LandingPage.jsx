@@ -16,7 +16,7 @@ const LandingPage = ({ setLogin }) => {
     if (userData.user) {
       navigate("/");
     }
-  }, []);
+  }, [userData, navigate]);
 
   return (
     <div className="landingPage">
