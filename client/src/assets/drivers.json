@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "fullName": "ששון חונדיאשבילי",
+    "truck": 123215321,
+    "img": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+  },
+  {
+    "id": 2,
+    "fullName": "דוד מלכה",
+    "truck": 123215321,
+    "img": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+  },
+  {
+    "id": 3,
+    "fullName": "משה משה",
+    "truck": 123215321,
+    "img": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+  },
+  {
+    "id": 4,
+    "fullName": "מיקי גוב",
+    "truck": 123215321,
+    "img": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+  },
+  {
+    "id": 5,
+    "fullName": "שמואל שמואלי",
+    "truck": 123215321,
+    "img": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+  }
+]

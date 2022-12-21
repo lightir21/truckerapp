@@ -1,0 +1,55 @@
+.navbar {
+  background-color: #003554;
+  border-bottom: 2px solid var(lighter-main-color);
+
+  &__container {
+    display: flex;
+    padding: 1rem;
+    margin: 0 1rem;
+  }
+
+  &__right {
+    flex: 1;
+  }
+
+  &__logo {
+    font-size: 6rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #fff;
+  }
+
+  &__left {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__profile {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    font-size: 2.4rem;
+
+    &-button {
+      background: none;
+      border: none;
+      font-size: 2.4rem;
+      color: #fff;
+      position: relative;
+      cursor: pointer;
+
+      &-text {
+        display: inline-block;
+      }
+    }
+
+    &-image {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      object-fit: fill;
+    }
+  }
+}

@@ -1,0 +1,85 @@
+:root {
+  --main-color: #003554;
+  --darker-main-color: #051923;
+  --lighter-main-color: #006494;
+  --lighter-main-color-2: #0582ca;
+
+  // Box shadows
+  --box-shadow-hard: 0 5px 20px rgb(0 0 0 / 30%);
+  --box-shadow-soft: 0 1px 6px rgb(0 0 0 / 28%);
+}
+
+*::before,
+*::after,
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Rubik", sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+  direction: rtl;
+}
+
+.btn {
+  background-color: var(--main-color);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow-hard);
+  transition: all 0.3s;
+
+  &-reverse {
+    background-color: transparent;
+    color: var(--main-color);
+    border: var(--main-color) 2px solid;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    background-color: #004166;
+  }
+
+  &-reverse:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: var(--box-shadow-soft);
+  }
+}
+
+button {
+  background: none;
+  border: none;
+}
+
+input {
+  border: none;
+  color: var(--main-color);
+
+  &::placeholder {
+    color: rgba(0, 52, 82, 0.42);
+  }
+
+  &:focus {
+    outline-color: var(--lighter-main-color);
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="file"] {
+  display: none;
+}

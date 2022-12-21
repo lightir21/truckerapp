@@ -1,0 +1,23 @@
+.adminSingleDriver {
+  box-shadow: var(--box-shadow-hard);
+  padding: 6rem;
+  font-size: 1.6rem;
+  cursor: pointer;
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+
+  transition: all 0.2s;
+
+  &__image {
+    border-radius: 50%;
+    border: 2px solid var(--main-color);
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}

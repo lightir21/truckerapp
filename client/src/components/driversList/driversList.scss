@@ -1,0 +1,35 @@
+.driversListTop {
+  &__input-container {
+    text-align: center;
+    margin: 2rem;
+  }
+
+  &__input {
+    border: 0.5px solid #000;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--lighter-main-color);
+    box-shadow: var(--box-shadow-hard);
+  }
+
+  &__addButton {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+  }
+
+  &__plus {
+    font-size: 2rem;
+  }
+}
+
+.driversList {
+  margin-top: 6rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  justify-items: center;
+}

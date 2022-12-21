@@ -1,0 +1,60 @@
+.addNewDriver {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10rem;
+  align-items: center;
+  height: calc(100vh - 83px);
+  padding-bottom: 8rem;
+  color: var(--main-color);
+  position: relative;
+
+  &__backBtn {
+    font-size: 1.6rem;
+    padding: 1rem 2rem;
+    position: absolute;
+    top: 5rem;
+    right: 10rem;
+  }
+
+  &__title {
+    margin-bottom: 3rem;
+    font-size: 2.4rem;
+    color: var(--main-color);
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+
+    &-box {
+      width: 35rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      & input {
+        background: none;
+        border: 1px solid var(--main-color);
+        border-radius: 3px;
+        padding: 0.5rem 0.5rem;
+        font-size: 1.6rem;
+      }
+    }
+  }
+
+  .customFile {
+    border: 1px solid var(--main-color);
+    border-radius: 3px;
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    align-self: center;
+    cursor: pointer;
+  }
+
+  &__addBtn {
+    padding: 1rem 0;
+  }
+}
