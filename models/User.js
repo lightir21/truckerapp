@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, "please provide userName"],
     trim: true,
+    unique: true,
   },
   password: {
     type: String,
@@ -23,6 +24,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     trim: true,
     default: "שם משפחה",
+  },
+  role: {
+    type: String,
+    enum: ["admin", "driver"],
   },
 });
 

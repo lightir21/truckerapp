@@ -1,6 +1,6 @@
 import { Dashboard, LandingPage, ProtectedRoute } from "./pages";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import {
   AddNewDriver,
   AdminDriverTaskManager,
@@ -8,8 +8,6 @@ import {
 } from "./components";
 
 function App() {
-  //testing purposes
-  const [login, setLogin] = useState(false);
   return (
     <div>
       <BrowserRouter>
@@ -17,7 +15,7 @@ function App() {
           <Route
             path="/"
             element={
-              <ProtectedRoute login={login}>
+              <ProtectedRoute>
                 <Dashboard />
               </ProtectedRoute>
             }
@@ -26,7 +24,7 @@ function App() {
             <Route path="/driver/:id" element={<AdminDriverTaskManager />} />
             <Route path="/addNewDriver" element={<AddNewDriver />} />
           </Route>
-          <Route path="landing" element={<LandingPage setLogin={setLogin} />} />
+          <Route path="landing" element={<LandingPage />} />
         </Routes>
       </BrowserRouter>
     </div>

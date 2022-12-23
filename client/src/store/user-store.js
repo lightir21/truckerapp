@@ -11,6 +11,7 @@ export const useUserStore = create(
   persist(
     (set, get) => ({
       userData: {},
+
       signIn: async (values) => {
         const { userName, password } = values;
 
@@ -20,8 +21,7 @@ export const useUserStore = create(
           userName,
           password,
         });
-
-        data && set({ userData: data });
+        data.data && set({ userData: data });
       },
 
       signUp: async (values) => {
@@ -35,7 +35,10 @@ export const useUserStore = create(
           userName,
           password,
           adminPassword,
+          role: "admin",
         });
+
+        data.user.role = undefined;
 
         data && set({ userData: data });
       },
