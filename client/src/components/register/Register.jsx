@@ -5,7 +5,7 @@ import { useUserStore } from "../../store/user-store";
 
 const Register = ({ setRegisteredClicked }) => {
   const { signIn, signUp, userData, setUser } = useUserStore((state) => state);
-  console.log(userData);
+
   const [values, setValues] = useState({
     userName: "",
     password: "",

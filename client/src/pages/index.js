@@ -1,5 +1,6 @@
 import Dashboard from "./dashboard/Dashboard";
+import DriversDashboard from "./driversDashboard/DriversDashboard";
 import LandingPage from "./landingPage/LandingPage";
-import ProtectedRoute from "./ProtectedRoute";
+import AdminProtectedRoute from "./AdminProtectedRoute";
 
-export { Dashboard, LandingPage, ProtectedRoute };
+export { Dashboard, LandingPage, AdminProtectedRoute, DriversDashboard };

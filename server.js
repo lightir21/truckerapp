@@ -1,6 +1,7 @@
 import "express-async-errors";
 import express from "express";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ import authRouter from "./routes/authRoutes.js";
 import notFoundMiddleware from "./middleware/not-found.js";
 import errorHandlerMiddleware from "./middleware/error-handler.js";
 
+app.use(cookieParser());
 app.use(express.json());
 
 app.get("/api/v1", (req, res) => {

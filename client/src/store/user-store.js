@@ -16,12 +16,12 @@ export const useUserStore = create(
         const { userName, password } = values;
 
         if (!password || !userName) return;
-
         const { data } = await authFetch.post("/auth/login", {
           userName,
           password,
         });
-        data.data && set({ userData: data });
+
+        data && set({ userData: data });
       },
 
       signUp: async (values) => {
@@ -43,7 +43,8 @@ export const useUserStore = create(
         data && set({ userData: data });
       },
       updateUser: () => {},
-      logoutUser: () => {
+      logoutUser: async () => {
+        await authFetch.post("/auth/logout");
         set(() => ({ userData: {} }));
       },
     }),

@@ -25,6 +25,10 @@ const register = async (req, res) => {
   const user = await User.create({ userName, password, role });
   const token = user.createJWT();
 
+  res.cookie("token", token, {
+    httpOnly: true,
+  });
+
   res.status(StatusCodes.CREATED).json({
     user: {
       userName: user.userName,
@@ -57,6 +61,10 @@ const login = async (req, res) => {
 
   const token = user.createJWT();
 
+  res.cookie("token", token, {
+    httpOnly: true,
+  });
+
   user.password = undefined;
   res.status(StatusCodes.OK).json({
     user,
@@ -64,8 +72,13 @@ const login = async (req, res) => {
   });
 };
 
+const logout = (req, res) => {
+  res.clearCookie("token");
+  res.status(StatusCodes.OK).json({ msg: "logged out successfully" });
+};
+
 const checkAdmin = async (req, res) => {
-  const { token } = req.body;
+  const token = req.cookies.token;
 
   if (!token) {
     throw new BadRequestError("No token found");
@@ -86,4 +99,4 @@ const checkAdmin = async (req, res) => {
   }
 };
 
-export { register, login, checkAdmin };
+export { register, login, checkAdmin, logout };

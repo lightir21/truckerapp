@@ -12,7 +12,7 @@ const Login = ({ setLogin }) => {
     password: "",
   });
 
-  const { signIn } = useUserStore((state) => state);
+  const { signIn, checkAuth } = useUserStore((state) => state);
 
   const navigate = useNavigate();
 
@@ -48,11 +48,7 @@ const Login = ({ setLogin }) => {
             onChange={handleChange}
           />
           <div className="login__form-buttons_container">
-            <button
-              type="submit"
-              className="login__form-btn btn"
-              onClick={() => setLogin(true)}
-            >
+            <button type="submit" className="login__form-btn btn">
               כנס
             </button>
             <button
