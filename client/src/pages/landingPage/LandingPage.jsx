@@ -13,7 +13,7 @@ const LandingPage = ({ setLogin }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userData.user) {
+    if (userData?.user) {
       navigate("/");
     }
   }, [userData, navigate]);

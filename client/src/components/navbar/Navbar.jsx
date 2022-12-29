@@ -1,13 +1,16 @@
 import "./navbar.scss";
 import { useState } from "react";
-import { ProfileDropdown } from "../index";
-import profile from "../../assets/NOF078.jpg";
+
+import profile from "../../assets/Demo-profile-picture.png";
 import { GiTruck } from "react-icons/gi";
 import { RiArrowDownSFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { useUserStore } from "../../store/user-store";
 
 const Navbar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const { logoutUser, userData } = useUserStore();
+  const { user } = userData;
   return (
     <div className="navbar">
       <div className="navbar__container">
@@ -24,18 +27,26 @@ const Navbar = () => {
                 onClick={() => setIsProfileOpen(!isProfileOpen)}
               >
                 <RiArrowDownSFill />
-                <p className="navbar__profile-button-text">Meir Meir</p>
+                <p className="navbar__profile-button-text">{user.userName}</p>
               </div>
               <div>
-                <ProfileDropdown isProfileOpen={isProfileOpen} />
+                <div className={`profileDropdown ${isProfileOpen && "active"}`}>
+                  <ul>
+                    <li onClick={() => console.log("profile clicked")}>
+                      פרופיל
+                    </li>
+                    <li onClick={logoutUser}>התנתק</li>
+                  </ul>
+                </div>
               </div>
             </div>
-
-            <img
-              src={profile}
-              alt="profile of"
-              className="navbar__profile-image"
-            />
+            {user.image || (
+              <img
+                src={profile}
+                alt="profile of"
+                className="navbar__profile-image"
+              />
+            )}
           </div>
         </div>
       </div>

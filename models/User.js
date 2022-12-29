@@ -27,7 +27,17 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
+    required: [true, "User must have a role"],
     enum: ["admin", "driver"],
+    default: "driver",
+  },
+  truckNum: {
+    type: Number,
+    minlength: 7,
+  },
+  image: {
+    type: String,
+    default: "",
   },
 });
 
@@ -39,6 +49,7 @@ UserSchema.pre("save", async function (next) {
 });
 
 UserSchema.methods.createJWT = function () {
+  console.log(this._id);
   return jwt.sign({ userId: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_LIFETIME,
   });

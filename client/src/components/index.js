@@ -1,10 +1,9 @@
 import AddNewDriver from "./addNewDriver/AddNewDriver";
 import AdminDriverTaskManager from "./adminDriverTaskManager/AdminDriverTaskManager";
-import AdminSingleDriver from "./driversList/adminSingleDriver/AdminSingleDriver";
+import AdminSingleDriverFigure from "./driversList/adminSingleDriver/AdminSingleDriverFigure";
 import DriversList from "./driversList/DriversList";
 import Login from "./login/Login";
 import Navbar from "./navbar/Navbar";
-import ProfileDropdown from "./navbar/profileDropdown/ProfileDropdown";
 import Register from "./register/Register";
 
 export {
@@ -13,7 +12,6 @@ export {
   Register,
   Navbar,
   DriversList,
-  AdminSingleDriver,
-  ProfileDropdown,
+  AdminSingleDriverFigure,
   AdminDriverTaskManager,
 };

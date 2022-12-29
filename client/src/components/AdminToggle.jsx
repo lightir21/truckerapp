@@ -14,15 +14,9 @@ const AdminToggle = () => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const {
-          data: { isTrue },
-        } = await authFetch.post("/auth/checkAuth");
+        const { status } = await authFetch.post("/auth/checkAuth");
 
-        if (isTrue) {
-          setAdmin(() => true);
-        } else {
-          setAdmin(() => false);
-        }
+        status && setAdmin(status === 200);
       } catch (error) {
         console.log(error);
       }

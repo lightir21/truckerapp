@@ -1,6 +1,7 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 import axios from "axios";
+import { addNewDriver } from "../service";
 
 // axios
 const authFetch = axios.create({
@@ -11,6 +12,8 @@ export const useUserStore = create(
   persist(
     (set, get) => ({
       userData: {},
+      drivers: [],
+      driver: {},
 
       signIn: async (values) => {
         const { userName, password } = values;
@@ -43,9 +46,23 @@ export const useUserStore = create(
         data && set({ userData: data });
       },
       updateUser: () => {},
+
       logoutUser: async () => {
         await authFetch.post("/auth/logout");
-        set(() => ({ userData: {} }));
+        set({ userData: {} });
+      },
+
+      addNewDriver: addNewDriver,
+
+      getAllDrivers: async () => {
+        const { data } = await authFetch.get("drivers");
+
+        data && set({ drivers: data.drivers });
+      },
+
+      getDriver: async (userId) => {
+        const { data } = await authFetch.get(`drivers/${userId}`);
+        data && set({ driver: data });
       },
     }),
     { name: "userData" }

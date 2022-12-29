@@ -1,13 +1,18 @@
 import "./driversList.scss";
-import data from "../../assets/drivers.json";
-import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
-import { AdminSingleDriver } from "../index";
+import { AdminSingleDriverFigure } from "../index";
 import { IoIosAdd } from "react-icons/io";
 import { useUserStore } from "../../store/user-store";
+import { useEffect } from "react";
+import { getAllDrivers } from "../../service";
 
 const DriversList = () => {
-  const [drivers, setDrivers] = useState(data);
+  const { drivers, getAllDrivers } = useUserStore();
+
+  useEffect(() => {
+    getAllDrivers();
+  }, []);
 
   const navigate = useNavigate();
 
@@ -30,8 +35,8 @@ const DriversList = () => {
         </button>
       </div>
       <div className="driversList">
-        {drivers.map((driver) => (
-          <AdminSingleDriver driver={driver} key={driver.id} />
+        {drivers?.map((driver) => (
+          <AdminSingleDriverFigure driver={driver} key={driver._id} />
         ))}
       </div>
     </>

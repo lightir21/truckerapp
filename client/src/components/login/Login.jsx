@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Register } from "../";
 import { useUserStore } from "../../store/user-store";
 import "./login.scss";
@@ -12,9 +11,7 @@ const Login = ({ setLogin }) => {
     password: "",
   });
 
-  const { signIn, checkAuth } = useUserStore((state) => state);
-
-  const navigate = useNavigate();
+  const { signIn } = useUserStore((state) => state);
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });

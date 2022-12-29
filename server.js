@@ -12,6 +12,7 @@ import connectDB from "./db/connect.js";
 
 // Routers
 import authRouter from "./routes/authRoutes.js";
+import driverRouter from "./routes/driverRoutes.js";
 
 // Middleware
 import notFoundMiddleware from "./middleware/not-found.js";
@@ -25,6 +26,7 @@ app.get("/api/v1", (req, res) => {
 });
 
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/drivers", driverRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

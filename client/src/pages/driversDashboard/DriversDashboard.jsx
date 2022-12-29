@@ -1,4 +1,10 @@
+import { Navbar } from "../../components";
+
 const DriversDashboard = () => {
-  return <div>DriversDashboard</div>;
+  return (
+    <div>
+      <Navbar />
+    </div>
+  );
 };
 export default DriversDashboard;

@@ -25,18 +25,15 @@ const register = async (req, res) => {
   const user = await User.create({ userName, password, role });
   const token = user.createJWT();
 
-  res.cookie("token", token, {
-    httpOnly: true,
-  });
+  res.cookie("token", token, {});
 
   res.status(StatusCodes.CREATED).json({
     user: {
       userName: user.userName,
       name: user.name,
       lastName: user.lastName,
-      role: user.role,
+      image: user.image,
     },
-    token,
   });
 };
 
@@ -61,9 +58,7 @@ const login = async (req, res) => {
 
   const token = user.createJWT();
 
-  res.cookie("token", token, {
-    httpOnly: true,
-  });
+  res.cookie("token", token);
 
   user.password = undefined;
   res.status(StatusCodes.OK).json({
@@ -85,8 +80,10 @@ const checkAdmin = async (req, res) => {
   }
 
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
-  const userId = decoded._id;
-  const user = await User.findOne({ userId });
+
+  const userId = decoded.userId;
+
+  const user = await User.findById(userId);
 
   if (!user) {
     throw new UnauthenticatedError("Unauthorized");
@@ -95,7 +92,7 @@ const checkAdmin = async (req, res) => {
   if (user.role === "admin") {
     res.status(StatusCodes.OK).json({ isTrue: true });
   } else {
-    res.status(StatusCodes.OK).json({ isTrue: false });
+    res.status(StatusCodes.UNAUTHORIZED).json({ isTrue: false });
   }
 };
 

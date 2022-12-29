@@ -1,13 +1,14 @@
 .adminSingleDriver {
   box-shadow: var(--box-shadow-hard);
-  padding: 6rem;
+  padding: 5rem;
   font-size: 1.6rem;
   cursor: pointer;
   border-radius: 8px;
+  width: 26rem;
 
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 2rem;
   align-items: center;
 
   transition: all 0.2s;
@@ -15,6 +16,7 @@
   &__image {
     border-radius: 50%;
     border: 2px solid var(--main-color);
+    width: 70%;
   }
 
   &:hover {

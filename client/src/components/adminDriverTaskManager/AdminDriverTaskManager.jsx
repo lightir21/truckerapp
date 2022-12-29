@@ -1,12 +1,20 @@
 import "./adminDriverTaskManager.scss";
-import drivers from "../../assets/drivers.json";
 import { Link, useParams } from "react-router-dom";
 import { IoIosAdd } from "react-icons/io";
+import defaultProfileImage from "../../assets/Demo-profile-picture.png";
+import { useEffect } from "react";
+import { useUserStore } from "../../store/user-store";
 
 const AdminDriverTaskManager = () => {
   const params = useParams();
 
-  const { id, fullName, truck, img } = drivers[params.id - 1];
+  const { getDriver, driver } = useUserStore();
+
+  useEffect(() => {
+    getDriver(params.id);
+  }, []);
+
+  const { userName, truckNum, image } = driver.user;
 
   return (
     <div className="adminDriverTaskManager">
@@ -15,13 +23,13 @@ const AdminDriverTaskManager = () => {
       </Link>
       <div className="adminDriverTaskManager__info">
         <img
-          src={img}
-          alt={`a profile of ${fullName}`}
+          src={image || defaultProfileImage}
+          alt={`a profile of ${userName}`}
           className="adminDriverTaskManager__info-image"
         />
-        <h2 className="adminDriverTaskManager__info-name">{fullName}</h2>
+        <h2 className="adminDriverTaskManager__info-name">{userName}</h2>
         <p className="adminDriverTaskManager__info-truck">
-          מספר משאית: {truck}
+          מספר משאית: {truckNum}
         </p>
       </div>
       <div className="adminDriverTaskManager__tasks">
