@@ -6,9 +6,20 @@ import { IoIosAdd } from "react-icons/io";
 import { useUserStore } from "../../store/user-store";
 import { useEffect } from "react";
 import { getAllDrivers } from "../../service";
+import { useState } from "react";
 
 const DriversList = () => {
+  const [filterInput, setFilterInput] = useState("");
+  const [filteredDrivers, setFilteredDrivers] = useState("");
+
   const { drivers, getAllDrivers } = useUserStore();
+
+  useEffect(() => {
+    const filtered = drivers?.filter((driver) =>
+      driver.userName.includes(filterInput)
+    );
+    setFilteredDrivers([...filtered]);
+  }, [filterInput]);
 
   useEffect(() => {
     getAllDrivers();
@@ -24,6 +35,8 @@ const DriversList = () => {
             type="text"
             className="driversListTop__input"
             placeholder="חפש נהג"
+            value={filterInput}
+            onChange={(e) => setFilterInput(e.target.value)}
           />
         </div>
         <button
@@ -35,7 +48,7 @@ const DriversList = () => {
         </button>
       </div>
       <div className="driversList">
-        {drivers?.map((driver) => (
+        {filteredDrivers?.map((driver) => (
           <AdminSingleDriverFigure driver={driver} key={driver._id} />
         ))}
       </div>
