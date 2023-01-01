@@ -15,6 +15,12 @@
     right: 2rem;
   }
 
+  &__datePicker {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--main-color);
+    font-size: 1.8rem;
+  }
+
   &__info {
     font-size: 1.6rem;
     margin-bottom: 8rem;

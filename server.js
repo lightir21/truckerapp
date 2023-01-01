@@ -13,13 +13,16 @@ import connectDB from "./db/connect.js";
 // Routers
 import authRouter from "./routes/authRoutes.js";
 import driverRouter from "./routes/driverRoutes.js";
+import jobRouter from "./routes/jobRoutes.js";
 
 // Middleware
 import notFoundMiddleware from "./middleware/not-found.js";
 import errorHandlerMiddleware from "./middleware/error-handler.js";
 
 app.use(cookieParser());
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
+
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 app.get("/api/v1", (req, res) => {
   res.json({ msg: "well met!" });
@@ -27,6 +30,7 @@ app.get("/api/v1", (req, res) => {
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/drivers", driverRouter);
+app.use("/api/v1/job", jobRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

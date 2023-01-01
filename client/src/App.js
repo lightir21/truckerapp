@@ -1,4 +1,4 @@
-import { LandingPage, AdminProtectedRoute } from "./pages";
+import { LandingPage, AdminProtectedRoute, AdminProfile } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   AddNewDriver,
@@ -23,6 +23,7 @@ function App() {
             <Route index element={<DriversList />} />
             <Route path="/driver/:id" element={<AdminDriverTaskManager />} />
             <Route path="/addNewDriver" element={<AddNewDriver />} />
+            <Route path="/profile" element={<AdminProfile />} />
           </Route>
 
           <Route path="landing" element={<LandingPage />} />

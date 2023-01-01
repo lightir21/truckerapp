@@ -3,6 +3,7 @@ import { UnauthenticatedError, BadRequestError } from "../errors/index.js";
 import dotenv from "dotenv";
 import StatusCodes from "http-status-codes";
 import jwt from "jsonwebtoken";
+import cloudinary from "../utils/cloudinary.js";
 
 dotenv.config();
 
@@ -72,6 +73,38 @@ const logout = (req, res) => {
   res.status(StatusCodes.OK).json({ msg: "logged out successfully" });
 };
 
+const updateImage = async (req, res) => {
+  const fileStr = req.body.data;
+  const uploadedResponse = await cloudinary.uploader.upload(fileStr);
+  const { secure_url } = uploadedResponse;
+
+  const token = req.cookies.token;
+
+  if (!token) {
+    throw new BadRequestError("No token found");
+  }
+
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+  const userId = decoded.userId;
+
+  const user = await User.findById(userId);
+
+  if (!user) {
+    throw new UnauthenticatedError("Unauthorized");
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(
+    { _id: userId },
+    { image: secure_url },
+    {
+      new: true,
+    }
+  );
+
+  res.status(StatusCodes.OK).json({ user: updatedUser });
+};
+
 const checkAdmin = async (req, res) => {
   const token = req.cookies.token;
 
@@ -96,4 +129,4 @@ const checkAdmin = async (req, res) => {
   }
 };
 
-export { register, login, checkAdmin, logout };
+export { register, login, checkAdmin, logout, updateImage };

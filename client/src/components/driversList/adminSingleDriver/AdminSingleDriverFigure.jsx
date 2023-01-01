@@ -3,8 +3,6 @@ import "./adminSingleDriver.scss";
 import defaultProfileImage from "../../../assets/Demo-profile-picture.png";
 
 const AdminSingleDriverFigure = ({ driver }) => {
-  console.log(driver);
-
   const navigate = useNavigate();
 
   const handleClick = (id) => {

@@ -1,0 +1,17 @@
+.adminProfile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+
+  &__imageUpload {
+    margin-bottom: 5rem;
+  }
+
+  &__img {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}

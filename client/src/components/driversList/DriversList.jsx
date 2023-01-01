@@ -5,7 +5,7 @@ import { AdminSingleDriverFigure } from "../index";
 import { IoIosAdd } from "react-icons/io";
 import { useUserStore } from "../../store/user-store";
 import { useEffect } from "react";
-import { getAllDrivers } from "../../service";
+
 import { useState } from "react";
 
 const DriversList = () => {
@@ -13,17 +13,15 @@ const DriversList = () => {
   const [filteredDrivers, setFilteredDrivers] = useState("");
 
   const { drivers, getAllDrivers } = useUserStore();
-
+  useEffect(() => {
+    getAllDrivers();
+  }, []);
   useEffect(() => {
     const filtered = drivers?.filter((driver) =>
       driver.userName.includes(filterInput)
     );
     setFilteredDrivers([...filtered]);
-  }, [filterInput]);
-
-  useEffect(() => {
-    getAllDrivers();
-  }, []);
+  }, [drivers, filterInput]);
 
   const navigate = useNavigate();
 
@@ -48,9 +46,10 @@ const DriversList = () => {
         </button>
       </div>
       <div className="driversList">
-        {filteredDrivers?.map((driver) => (
-          <AdminSingleDriverFigure driver={driver} key={driver._id} />
-        ))}
+        {filteredDrivers &&
+          filteredDrivers?.map((driver) => (
+            <AdminSingleDriverFigure driver={driver} key={driver._id} />
+          ))}
       </div>
     </>
   );
