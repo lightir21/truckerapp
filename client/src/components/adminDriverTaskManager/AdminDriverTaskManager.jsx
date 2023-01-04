@@ -4,19 +4,24 @@ import { IoIosAdd } from "react-icons/io";
 import defaultProfileImage from "../../assets/Demo-profile-picture.png";
 import { useEffect, useState } from "react";
 import { useUserStore } from "../../store/user-store";
-import { AdminDriverAddMission } from "../index";
+import { AdminDriverAddMission, DriverSingleMission } from "../index";
 
 const AdminDriverTaskManager = () => {
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
-  const [isPopupOpen, setIsPopupOpen] = useState(true);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const params = useParams();
 
-  const { getDriver, driver, loading } = useUserStore();
+  const { getDriver, driver, loading, missions, getMissionByDate } =
+    useUserStore();
 
   useEffect(() => {
     getDriver(params.id);
   }, []);
+
+  useEffect(() => {
+    !isPopupOpen && getMissionByDate(date, driver?.user?._id);
+  }, [date, driver, getMissionByDate, isPopupOpen]);
 
   const onDateChange = (e) => {
     setDate(e.target.value);
@@ -28,7 +33,7 @@ const AdminDriverTaskManager = () => {
 
   return (
     <div className="adminDriverTaskManager">
-      {isPopupOpen && <AdminDriverAddMission />}
+      {isPopupOpen && <AdminDriverAddMission setIsPopupOpen={setIsPopupOpen} />}
       <Link className="adminDriverTaskManager__backBtn btn" to="/">
         חזרה
       </Link>
@@ -40,22 +45,33 @@ const AdminDriverTaskManager = () => {
       />
       <div className="adminDriverTaskManager__info">
         <img
-          src={driver.user.image || defaultProfileImage}
-          alt={`a profile of ${driver.user.userName}`}
+          src={driver?.user?.image || defaultProfileImage}
+          alt={`a profile of ${driver?.user?.userName}`}
           className="adminDriverTaskManager__info-image"
         />
+
         <h2 className="adminDriverTaskManager__info-name">
-          {driver.user.userName}
+          {driver?.user?.userName}
         </h2>
+
         <p className="adminDriverTaskManager__info-truck">
-          מספר משאית: {driver.user.truckNum}
+          מספר משאית: {driver?.user?.truckNum}
         </p>
       </div>
       <div className="adminDriverTaskManager__tasks">
-        <button className="adminDriverTaskManager__tasks-addButton btn">
+        <button
+          className="adminDriverTaskManager__tasks-addButton btn"
+          onClick={() => setIsPopupOpen(true)}
+        >
           <IoIosAdd /> הוסף משימה חדשה
         </button>
+
         <hr />
+        <div className="adminDriverTaskManager__tasksList">
+          {missions?.map((mission) => (
+            <DriverSingleMission mission={mission} />
+          ))}
+        </div>
       </div>
     </div>
   );

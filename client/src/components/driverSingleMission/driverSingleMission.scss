@@ -1,0 +1,18 @@
+.driverSingleMission {
+  display: flex;
+  width: 100%;
+  font-size: 1.8rem;
+  font-weight: 600;
+  gap: 0.7rem;
+  padding: 0.5rem;
+  &:nth-of-type(even) {
+    background-color: #00355438;
+  }
+
+  p {
+    min-width: fit-content;
+    width: 10%;
+    position: relative;
+    padding-left: 1rem;
+  }
+}

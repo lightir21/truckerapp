@@ -1,6 +1,7 @@
 import AddNewDriver from "./addNewDriver/AddNewDriver";
 import AdminDriverAddMission from "./adminDriverAddMission/AdminDriverAddMission";
 import AdminDriverTaskManager from "./adminDriverTaskManager/AdminDriverTaskManager";
+import DriverSingleMission from "./driverSingleMission/DriverSingleMission";
 import AdminSingleDriverFigure from "./driversList/adminSingleDriver/AdminSingleDriverFigure";
 import DriversList from "./driversList/DriversList";
 import Login from "./login/Login";
@@ -15,4 +16,5 @@ export {
   AdminSingleDriverFigure,
   AdminDriverTaskManager,
   AdminDriverAddMission,
+  DriverSingleMission,
 };

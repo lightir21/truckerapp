@@ -1,4 +1,65 @@
 .AdminDriverAddMission {
   position: absolute;
   top: 10rem;
+  width: 80%;
+  height: 60vh;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+  box-shadow: var(--box-shadow-soft);
+  z-index: 100;
+
+  &__close {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 1.8rem;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  &__heading {
+    font-size: 2.4rem;
+    border-bottom: 2px solid var(--main-color);
+  }
+
+  &__inputBox {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__form {
+    &-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      justify-content: center;
+    }
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: center;
+
+    &-input {
+      background: none;
+      border: 2px solid var(--main-color);
+      border-radius: 8px;
+      padding: 0.5rem 0.5rem;
+      font-size: 1.8rem;
+    }
+
+    &-label {
+      font-size: 1.6rem;
+      font-weight: 600;
+    }
+  }
+
+  &__btn {
+    padding: 1.5rem 5rem;
+    justify-self: flex-start;
+  }
 }

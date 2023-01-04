@@ -38,10 +38,16 @@
 
   &__tasks {
     width: 100%;
+    height: 48rem;
 
     &-addButton {
       padding: 1rem 2rem;
       margin-bottom: 2rem;
     }
+  }
+
+  &__tasksList {
+    overflow-y: scroll;
+    height: 100%;
   }
 }

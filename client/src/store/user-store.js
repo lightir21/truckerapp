@@ -2,6 +2,7 @@ import create from "zustand";
 import { persist } from "zustand/middleware";
 import axios from "axios";
 import { addNewDriver } from "../service";
+import { json } from "react-router-dom";
 
 // axios
 const authFetch = axios.create({
@@ -14,6 +15,7 @@ export const useUserStore = create(
       userData: {},
       drivers: [],
       driver: {},
+      missions: [],
       loading: true,
 
       signIn: async (values) => {
@@ -75,10 +77,30 @@ export const useUserStore = create(
             data: file,
           });
           data && set({ userData: data });
-          console.log(data);
         } catch (error) {
           console.log(error);
         }
+      },
+
+      addNewMission: async (values, driverId) => {
+        try {
+          await authFetch.post("job", {
+            ...values,
+            createdFor: driverId,
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      },
+
+      getMissionByDate: async (date, driverId) => {
+        try {
+          const { data } = await authFetch.post("job/getJobs", {
+            date,
+            driverId,
+          });
+          data && set({ missions: data });
+        } catch (error) {}
       },
     }),
     { name: "userData" }
