@@ -4,7 +4,8 @@
   font-size: 1.8rem;
   font-weight: 600;
   gap: 0.7rem;
-  padding: 0.5rem;
+  padding: 1rem;
+  justify-content: space-between;
   &:nth-of-type(even) {
     background-color: #00355438;
   }
@@ -14,5 +15,26 @@
     width: 10%;
     position: relative;
     padding-left: 1rem;
+  }
+
+  &__continueReading {
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: var(--lighter-main-color);
+  }
+
+  &__exitIcon {
+    margin-right: 1rem;
+    transform: translateY(3px);
+    cursor: pointer;
+  }
+
+  &__iconsBox {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__icon {
+    cursor: pointer;
   }
 }

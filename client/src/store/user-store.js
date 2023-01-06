@@ -2,7 +2,6 @@ import create from "zustand";
 import { persist } from "zustand/middleware";
 import axios from "axios";
 import { addNewDriver } from "../service";
-import { json } from "react-router-dom";
 
 // axios
 const authFetch = axios.create({
@@ -101,6 +100,18 @@ export const useUserStore = create(
           });
           data && set({ missions: data });
         } catch (error) {}
+      },
+
+      deleteMission: async ({ jobId }) => {
+        try {
+          await authFetch.delete("job", { data: { jobId } });
+
+          set((state) => ({
+            missions: state.missions.filter((mission) => mission._id !== jobId),
+          }));
+        } catch (error) {
+          console.log(error);
+        }
       },
     }),
     { name: "userData" }

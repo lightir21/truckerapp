@@ -1,5 +1,14 @@
 import "./driverSingleMission.scss";
-const driverSingleMission = ({ mission }) => {
+import { useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { useUserStore } from "../../store/user-store";
+
+const DriverSingleMission = ({ mission }) => {
+  const [continueReading, setContinueReading] = useState(true);
+
+  const { deleteMission } = useUserStore();
+
   const {
     date,
     customer,
@@ -12,6 +21,7 @@ const driverSingleMission = ({ mission }) => {
     contact1,
     contact2,
     others,
+    _id,
   } = mission;
 
   let newDate = date.split("T")[0].split("-").reverse().join(".");
@@ -19,16 +29,40 @@ const driverSingleMission = ({ mission }) => {
   return (
     <div className="driverSingleMission">
       <p>
-        ל {newDate}, שם לקוח: {customer}, התייצבות ב{startLocation} בשעה -{time}
-        , {destination && `העמסה ל: ${destination}`}.
-        {craneType && ` סוג מנוף: ${craneType},`}
-        {departmentNum && ` מספר מחלקה: ${departmentNum},`}
-        {invitationNum && ` מספר הזמנה: ${invitationNum}, `}
-        {contact1 &&
-          ` איש קשר: ${contact1}` + (contact2 ? ` או ${contact2}` : "")}
-        {others && `שונות ${others} `}
+        ל- {newDate}, שם לקוח: {customer}, התייצבות ב{startLocation} בשעה -
+        {time}
+        {continueReading ? (
+          <span
+            className="driverSingleMission__continueReading"
+            onClick={() => setContinueReading(false)}
+          >
+            המשך...
+          </span>
+        ) : (
+          <span>
+            ,{destination && ` העמסה ל: ${destination}`}.
+            {craneType && ` סוג מנוף: ${craneType},`}
+            {departmentNum && ` מספר מחלקה: ${departmentNum},`}
+            {invitationNum && ` מספר הזמנה: ${invitationNum}, `}
+            {contact1 &&
+              ` איש קשר: ${contact1}` + (contact2 ? ` או ${contact2}` : "")}
+            {others && `שונות ${others} `}
+            <AiOutlineClose
+              className="driverSingleMission__exitIcon"
+              onClick={() => setContinueReading(true)}
+            />
+          </span>
+        )}
       </p>
+      <div className="driverSingleMission__iconsBox">
+        <FaEdit className="driverSingleMission__icon" />
+        <FaTrashAlt
+          className="driverSingleMission__icon"
+          onClick={() => deleteMission({ jobId: _id })}
+        />
+      </div>
     </div>
   );
 };
-export default driverSingleMission;
+
+export default DriverSingleMission;

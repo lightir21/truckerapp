@@ -22,4 +22,19 @@ const getAllJobsByDate = async (req, res) => {
   res.status(StatusCodes.OK).json(jobs);
 };
 
-export { addNewJob, getAllJobsByDate };
+const deleteJob = async (req, res) => {
+  const { jobId } = req.body;
+  console.log(req.body);
+
+  const job = Job.findById(jobId);
+
+  if (!job) {
+    throw new BadRequestError("No job with that id");
+  }
+
+  await job.remove();
+
+  res.status(StatusCodes.OK).json({ msg: "Job removed" });
+};
+
+export { addNewJob, getAllJobsByDate, deleteJob };

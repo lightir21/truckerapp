@@ -69,7 +69,7 @@ const AdminDriverTaskManager = () => {
         <hr />
         <div className="adminDriverTaskManager__tasksList">
           {missions?.map((mission) => (
-            <DriverSingleMission mission={mission} />
+            <DriverSingleMission key={mission._id} mission={mission} />
           ))}
         </div>
       </div>
