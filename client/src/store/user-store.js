@@ -15,7 +15,19 @@ export const useUserStore = create(
       drivers: [],
       driver: {},
       missions: [],
+      editMission: {},
       loading: true,
+      isEditing: true,
+
+      setIsEditing: (bool) => set({ isEditing: bool }),
+
+      setEditMission: ({ jobId }) => {
+        set((state) => ({
+          editMission: state.missions.filter(
+            (mission) => mission._id === jobId
+          )[0],
+        }));
+      },
 
       signIn: async (values) => {
         const { userName, password } = values;
@@ -108,6 +120,26 @@ export const useUserStore = create(
 
           set((state) => ({
             missions: state.missions.filter((mission) => mission._id !== jobId),
+          }));
+        } catch (error) {
+          console.log(error);
+        }
+      },
+
+      updateMission: async ({ jobId }, values) => {
+        try {
+          const updatedMission = await authFetch.patch("job", {
+            jobId,
+            ...values,
+          });
+
+          set((state) => ({
+            missions: state.missions.map((mission) => {
+              if (mission._id === jobId) {
+                return updatedMission;
+              }
+              return mission;
+            }),
           }));
         } catch (error) {
           console.log(error);

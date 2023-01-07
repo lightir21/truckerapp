@@ -17,10 +17,17 @@ const initialState = {
   others: "",
 };
 
-const AdminDriverAddMission = ({ setIsPopupOpen, addMissionRef }) => {
-  const [values, setValues] = useState(initialState);
+const AdminDriverAddMission = ({ setIsPopupOpen }) => {
+  const {
+    addNewMission,
+    driver,
+    isEditing,
+    setIsEditing,
+    editMission,
+    updateMission,
+  } = useUserStore();
 
-  const { addNewMission, driver } = useUserStore();
+  const [values, setValues] = useState(isEditing ? editMission : initialState);
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -33,16 +40,34 @@ const AdminDriverAddMission = ({ setIsPopupOpen, addMissionRef }) => {
     setValues(initialState);
   };
 
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    await updateMission(editMission?._id, values);
+    setValues(initialState);
+    setIsEditing(false);
+    setIsPopupOpen(false);
+  };
+
+  const handleClose = () => {
+    setIsEditing(false);
+    setIsPopupOpen(false);
+  };
+
   return (
     <div className="AdminDriverAddMission">
       <AiOutlineClose
         className="AdminDriverAddMission__close"
-        onClick={() => setIsPopupOpen(false)}
+        onClick={handleClose}
       />
 
-      <h2 className="AdminDriverAddMission__heading">הוסף משימה חדשה</h2>
+      <h2 className="AdminDriverAddMission__heading">
+        {isEditing ? "עדכן משימה" : "הוסף משימה חדשה"}
+      </h2>
 
-      <form className="AdminDriverAddMission__form" onSubmit={handleSubmit}>
+      <form
+        className="AdminDriverAddMission__form"
+        onSubmit={isEditing ? handleEditSubmit : handleSubmit}
+      >
         <div className="AdminDriverAddMission__form-container">
           <div className="AdminDriverAddMission__inputBox">
             <label className="AdminDriverAddMission__form-label" htmlFor="date">
@@ -54,6 +79,7 @@ const AdminDriverAddMission = ({ setIsPopupOpen, addMissionRef }) => {
               name="date"
               type="date"
               onChange={handleChange}
+              value={values?.date.split("T")[0]}
             />
           </div>
 
@@ -66,6 +92,7 @@ const AdminDriverAddMission = ({ setIsPopupOpen, addMissionRef }) => {
               name="customer"
               type="text"
               onChange={handleChange}
+              value={values?.customer}
             />
           </div>
 
@@ -81,6 +108,7 @@ const AdminDriverAddMission = ({ setIsPopupOpen, addMissionRef }) => {
               name="startLocation"
               type="text"
               onChange={handleChange}
+              value={values?.startLocation}
             />
           </div>
 
@@ -93,6 +121,7 @@ const AdminDriverAddMission = ({ setIsPopupOpen, addMissionRef }) => {
               name="time"
               type="text"
               onChange={handleChange}
+              value={values?.time}
             />
           </div>
 
@@ -108,6 +137,7 @@ const AdminDriverAddMission = ({ setIsPopupOpen, addMissionRef }) => {
               name="destination"
               type="text"
               onChange={handleChange}
+              value={values?.destination}
             />
           </div>
 
@@ -123,6 +153,7 @@ const AdminDriverAddMission = ({ setIsPopupOpen, addMissionRef }) => {
               name="craneType"
               type="text"
               onChange={handleChange}
+              value={values?.craneType}
             />
           </div>
 
@@ -138,6 +169,7 @@ const AdminDriverAddMission = ({ setIsPopupOpen, addMissionRef }) => {
               name="departmentNum"
               type="text"
               onChange={handleChange}
+              value={values?.departmentNum}
             />
           </div>
 
@@ -153,6 +185,7 @@ const AdminDriverAddMission = ({ setIsPopupOpen, addMissionRef }) => {
               name="invitationNum"
               type="text"
               onChange={handleChange}
+              value={values?.invitationNum}
             />
           </div>
 
@@ -168,6 +201,7 @@ const AdminDriverAddMission = ({ setIsPopupOpen, addMissionRef }) => {
               name="contact1"
               type="text"
               onChange={handleChange}
+              value={values?.contact1}
             />
           </div>
 
@@ -183,6 +217,7 @@ const AdminDriverAddMission = ({ setIsPopupOpen, addMissionRef }) => {
               name="contact2"
               type="text"
               onChange={handleChange}
+              value={values?.contact2}
             />
           </div>
 
@@ -198,11 +233,12 @@ const AdminDriverAddMission = ({ setIsPopupOpen, addMissionRef }) => {
               name="others"
               type="textField"
               onChange={handleChange}
+              value={values?.others}
             />
           </div>
         </div>
         <button type="submit" className="AdminDriverAddMission__btn btn">
-          הוסף
+          {isEditing ? "עדכן" : "הוסף"}
         </button>
       </form>
     </div>

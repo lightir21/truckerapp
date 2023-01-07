@@ -37,4 +37,25 @@ const deleteJob = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: "Job removed" });
 };
 
-export { addNewJob, getAllJobsByDate, deleteJob };
+const updateJob = async (req, res) => {
+  const { _id: jobId, date } = req.body;
+
+  if (!jobId) {
+    throw new BadRequestError("No job with that id");
+  }
+
+  if (!date) {
+    throw new BadRequestError("Job must have a date");
+  }
+
+  console.log(req.body);
+
+  const updatedJob = await Job.findByIdAndUpdate(jobId, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(StatusCodes.OK).json({ updatedJob });
+};
+
+export { addNewJob, getAllJobsByDate, deleteJob, updateJob };

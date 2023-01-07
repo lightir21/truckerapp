@@ -69,7 +69,11 @@ const AdminDriverTaskManager = () => {
         <hr />
         <div className="adminDriverTaskManager__tasksList">
           {missions?.map((mission) => (
-            <DriverSingleMission key={mission._id} mission={mission} />
+            <DriverSingleMission
+              key={mission._id}
+              mission={mission}
+              setIsPopupOpen={setIsPopupOpen}
+            />
           ))}
         </div>
       </div>

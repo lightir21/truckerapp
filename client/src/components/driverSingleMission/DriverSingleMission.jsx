@@ -4,10 +4,10 @@ import { AiOutlineClose } from "react-icons/ai";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import { useUserStore } from "../../store/user-store";
 
-const DriverSingleMission = ({ mission }) => {
+const DriverSingleMission = ({ mission, setIsPopupOpen }) => {
   const [continueReading, setContinueReading] = useState(true);
 
-  const { deleteMission } = useUserStore();
+  const { deleteMission, setIsEditing, setEditMission } = useUserStore();
 
   const {
     date,
@@ -25,6 +25,12 @@ const DriverSingleMission = ({ mission }) => {
   } = mission;
 
   let newDate = date.split("T")[0].split("-").reverse().join(".");
+
+  const handleUpdateMission = async () => {
+    await setEditMission({ jobId: _id });
+    setIsEditing(true);
+    setIsPopupOpen(true);
+  };
 
   return (
     <div className="driverSingleMission">
@@ -55,7 +61,10 @@ const DriverSingleMission = ({ mission }) => {
         )}
       </p>
       <div className="driverSingleMission__iconsBox">
-        <FaEdit className="driverSingleMission__icon" />
+        <FaEdit
+          className="driverSingleMission__icon"
+          onClick={handleUpdateMission}
+        />
         <FaTrashAlt
           className="driverSingleMission__icon"
           onClick={() => deleteMission({ jobId: _id })}
