@@ -52,8 +52,26 @@ const Navbar = () => {
               <div>
                 <div className={`profileDropdown ${isProfileOpen && "active"}`}>
                   <ul>
-                    <li onClick={() => navigate("/profile")}>פרופיל</li>
-                    <li onClick={logoutUser}>התנתק</li>
+                    <li
+                      className={
+                        !isProfileOpen
+                          ? "profileDropdown__links show"
+                          : undefined
+                      }
+                      onClick={() => navigate("/profile")}
+                    >
+                      פרופיל
+                    </li>
+                    <li
+                      className={
+                        !isProfileOpen
+                          ? "profileDropdown__links show"
+                          : undefined
+                      }
+                      onClick={logoutUser}
+                    >
+                      התנתק
+                    </li>
                   </ul>
                 </div>
               </div>

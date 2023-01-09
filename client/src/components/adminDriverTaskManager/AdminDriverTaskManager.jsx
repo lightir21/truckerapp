@@ -1,6 +1,7 @@
 import "./adminDriverTaskManager.scss";
 import { Link, useParams } from "react-router-dom";
 import { IoIosAdd } from "react-icons/io";
+import { FaEdit, FaCheck } from "react-icons/fa";
 import defaultProfileImage from "../../assets/Demo-profile-picture.png";
 import { useEffect, useState } from "react";
 import { useUserStore } from "../../store/user-store";
@@ -9,11 +10,20 @@ import { AdminDriverAddMission, DriverSingleMission } from "../index";
 const AdminDriverTaskManager = () => {
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isTruckNumEditing, setIsTruckNumEditing] = useState(false);
 
   const params = useParams();
 
-  const { getDriver, driver, loading, missions, getMissionByDate } =
-    useUserStore();
+  const {
+    getDriver,
+    driver,
+    loading,
+    missions,
+    getMissionByDate,
+    updateTruckNum,
+  } = useUserStore();
+
+  const [truckNum, setTruckNum] = useState(driver?.user?.truckNum);
 
   useEffect(() => {
     getDriver(params.id);
@@ -54,9 +64,34 @@ const AdminDriverTaskManager = () => {
           {driver?.user?.userName}
         </h2>
 
-        <p className="adminDriverTaskManager__info-truck">
-          מספר משאית: {driver?.user?.truckNum}
-        </p>
+        {/* Edit Truck Number */}
+        {isTruckNumEditing ? (
+          <div className="adminDriverTaskManager__info-truck">
+            <label htmlFor="truckNum">מספר משאית</label>
+            <input
+              type="text"
+              name="truckNum"
+              id="truckNum"
+              className="adminDriverTaskManager__input"
+              value={truckNum}
+              onChange={(e) => setTruckNum(e.target.value)}
+            />
+            <FaCheck
+              onClick={async () => {
+                await updateTruckNum(params.id, truckNum);
+                setIsTruckNumEditing(false);
+              }}
+            />
+          </div>
+        ) : (
+          <p className="adminDriverTaskManager__info-truck">
+            מספר משאית: {driver?.user?.truckNum}
+            <FaEdit
+              className="adminDriverTaskManager__info-truck-edit"
+              onClick={() => setIsTruckNumEditing(true)}
+            />
+          </p>
+        )}
       </div>
       <div className="adminDriverTaskManager__tasks">
         <button

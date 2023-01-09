@@ -48,8 +48,6 @@ const updateJob = async (req, res) => {
     throw new BadRequestError("Job must have a date");
   }
 
-  console.log(req.body);
-
   const updatedJob = await Job.findByIdAndUpdate(jobId, req.body, {
     new: true,
     runValidators: true,

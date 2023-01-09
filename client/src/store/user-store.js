@@ -145,6 +145,18 @@ export const useUserStore = create(
           console.log(error);
         }
       },
+
+      updateTruckNum: async (driverId, truckNum) => {
+        try {
+          const { data } = await authFetch.patch(`drivers/${driverId}`, {
+            truckNum,
+          });
+
+          set({ driver: { user: data } });
+        } catch (error) {
+          console.log(error);
+        }
+      },
     }),
     { name: "userData" }
   )

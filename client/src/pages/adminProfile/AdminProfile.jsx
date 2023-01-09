@@ -10,7 +10,6 @@ const AdminProfile = () => {
   } = useUserStore();
   const [previewSource, setPreviewSource] = useState("");
   const [values, setValues] = useState(user);
-  console.log(user);
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     createFilePreview(file);

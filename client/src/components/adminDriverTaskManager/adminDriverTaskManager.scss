@@ -34,6 +34,21 @@
       width: 8rem;
       border-radius: 50%;
     }
+
+    &-truck {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      &-edit {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__input {
+    width: 12rem;
+    font-size: 1.6rem;
   }
 
   &__tasks {

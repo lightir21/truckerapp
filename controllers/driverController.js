@@ -49,6 +49,27 @@ const getDriver = async (req, res) => {
   res.status(StatusCodes.OK).json({ user: driver });
 };
 
+const updateDriver = async (req, res) => {
+  const { id: driverId } = req.params;
+
+  const { truckNum } = req.body;
+
+  const driver = await User.findById(driverId);
+
+  if (!driver) {
+    throw new BadRequestError("No driver with that ID");
+  }
+
+  driver.truckNum = truckNum;
+
+  const updatedDriver = await User.findByIdAndUpdate(driverId, driver, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(StatusCodes.OK).json(updatedDriver);
+};
+
 export const setProfilePic = (req, res, next) => {};
 
-export { addNewDriver, getAllDrivers, getDriver };
+export { addNewDriver, getAllDrivers, getDriver, updateDriver };

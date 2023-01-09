@@ -59,7 +59,7 @@
   padding: 0 1rem;
   border-radius: 3px;
   position: absolute;
-  top: 120%;
+  top: 130%;
   right: 0;
   background-color: var(--main-color);
   opacity: 0;
@@ -72,5 +72,11 @@
 
   &.active {
     opacity: 1;
+  }
+
+  &__links {
+    &.show {
+      display: none;
+    }
   }
 }
