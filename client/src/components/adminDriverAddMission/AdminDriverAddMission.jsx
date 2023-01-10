@@ -79,7 +79,7 @@ const AdminDriverAddMission = ({ setIsPopupOpen }) => {
               name="date"
               type="date"
               onChange={handleChange}
-              value={values?.date.split("T")[0]}
+              value={values?.date?.split("T")[0]}
             />
           </div>
 

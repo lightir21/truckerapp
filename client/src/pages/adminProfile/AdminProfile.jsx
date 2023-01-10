@@ -7,9 +7,12 @@ const AdminProfile = () => {
   const {
     userData: { user },
     uploadProfileImg,
+    updateAdminInfo,
   } = useUserStore();
+
   const [previewSource, setPreviewSource] = useState("");
   const [values, setValues] = useState(user);
+
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     createFilePreview(file);
@@ -23,23 +26,27 @@ const AdminProfile = () => {
     };
   };
 
-  const handleSubmitFile = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (!previewSource) return;
-    uploadImage(previewSource);
+    if (previewSource) {
+      uploadImage(previewSource);
+    }
+
+    updateAdminInfo(values);
   };
 
   const uploadImage = (base64EncodedImage) => {
     uploadProfileImg(base64EncodedImage);
   };
 
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
   return (
     <div className="adminProfile">
       <div className="adminProfile__container">
-        <form
-          className="adminProfile__formContainer"
-          onSubmit={handleSubmitFile}
-        >
+        <form className="adminProfile__formContainer" onSubmit={handleSubmit}>
           <div className="adminProfile__imageUpload">
             <label htmlFor="file-input">
               <img
@@ -56,27 +63,33 @@ const AdminProfile = () => {
             />
           </div>
 
-          <div className="adminProfile__inputContainer">
-            <label htmlFor="name">שם: </label>
-            <input
-              id="name"
-              className="adminProfile__input"
-              name="name"
-              type="text"
-              //   value={user.name}
-            />
+          <div className="adminProfile__info">
+            <div className="adminProfile__inputContainer">
+              <label htmlFor="name">שם: </label>
+              <input
+                id="name"
+                className="adminProfile__input"
+                name="name"
+                type="text"
+                value={values?.name}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="adminProfile__inputContainer">
+              <label htmlFor="lastName">שם משפחה: </label>
+              <input
+                id="lastName"
+                className="adminProfile__input"
+                name="lastName"
+                type="text"
+                value={values?.lastName}
+                onChange={handleChange}
+              />
+            </div>
           </div>
-          <div className="adminProfile__inputContainer">
-            <label htmlFor="lastName">שם משפחה: </label>
-            <input
-              id="lastName"
-              className="adminProfile__input"
-              name="lastName"
-              type="text"
-              //   value={user.lastName}
-            />
-          </div>
-          <button type="submit">עדכן שינויים</button>
+          <button type="submit" className="adminProfile__btn btn">
+            עדכן שינויים
+          </button>
         </form>
       </div>
     </div>

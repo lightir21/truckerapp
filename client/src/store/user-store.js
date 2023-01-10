@@ -157,6 +157,15 @@ export const useUserStore = create(
           console.log(error);
         }
       },
+
+      updateAdminInfo: async (values) => {
+        try {
+          const { data } = await authFetch.patch("auth", values);
+          set({ userData: data });
+        } catch (error) {
+          console.log(error);
+        }
+      },
     }),
     { name: "userData" }
   )

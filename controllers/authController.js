@@ -75,6 +75,7 @@ const logout = (req, res) => {
 
 const updateImage = async (req, res) => {
   const fileStr = req.body.data;
+
   const uploadedResponse = await cloudinary.uploader.upload(fileStr);
   const { secure_url } = uploadedResponse;
 
@@ -105,6 +106,30 @@ const updateImage = async (req, res) => {
   res.status(StatusCodes.OK).json({ user: updatedUser });
 };
 
+const updateAdminInfo = async (req, res) => {
+  const token = req.cookies.token;
+
+  if (!token) {
+    throw new BadRequestError("No token found");
+  }
+
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+  const userId = decoded.userId;
+
+  const user = await User.findById(userId);
+
+  if (!user) {
+    throw new UnauthenticatedError("Unauthorized");
+  }
+
+  const updatedUser = await User.findByIdAndUpdate({ _id: userId }, req.body, {
+    new: true,
+  });
+
+  res.status(StatusCodes.OK).json({ user: updatedUser });
+};
+
 const checkAdmin = async (req, res) => {
   const token = req.cookies.token;
 
@@ -129,4 +154,4 @@ const checkAdmin = async (req, res) => {
   }
 };
 
-export { register, login, checkAdmin, logout, updateImage };
+export { register, login, checkAdmin, logout, updateImage, updateAdminInfo };
