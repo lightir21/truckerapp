@@ -6,9 +6,11 @@ import { addNewDriver } from "../service";
 // axios
 const authFetch = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL,
+  withCredentials: true,
+  headers: {
+    "Content-type": "application/json",
+  },
 });
-
-axios.defaults.withCredentials = true;
 
 export const useUserStore = create(
   persist(

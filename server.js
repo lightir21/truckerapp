@@ -26,6 +26,7 @@ app.use(
     credentials: true,
   })
 );
+
 app.use(cookieParser());
 app.use(express.json({ limit: "50mb" }));
 
