@@ -26,7 +26,13 @@ const register = async (req, res) => {
   const user = await User.create({ userName, password, role });
   const token = user.createJWT();
 
-  res.cookie("token", token);
+  const oneDay = 1000 * 60 * 60 * 24;
+  res.cookie("token", token, {
+    httpOnly: true,
+    sameSite: "None",
+    secure: true,
+    expires: new Date(Date.now() + oneDay),
+  });
 
   res.status(StatusCodes.CREATED).json({
     user: {
@@ -59,10 +65,12 @@ const login = async (req, res) => {
 
   const token = user.createJWT();
 
+  const oneDay = 1000 * 60 * 60 * 24;
   res.cookie("token", token, {
     httpOnly: true,
     sameSite: "None",
     secure: true,
+    expires: new Date(Date.now() + oneDay),
   });
 
   user.password = undefined;
