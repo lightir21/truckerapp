@@ -23,7 +23,7 @@ import errorHandlerMiddleware from "./middleware/error-handler.js";
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
-    allowCredentials: true,
+    credentials: true,
   })
 );
 app.use(cookieParser());
