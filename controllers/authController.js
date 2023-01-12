@@ -59,7 +59,11 @@ const login = async (req, res) => {
 
   const token = user.createJWT();
 
-  res.cookie("token", token, { httpOnly: true, SameSite: "None" });
+  res.cookie("token", token, {
+    httpOnly: true,
+    sameSite: "None",
+    secure: true,
+  });
 
   user.password = undefined;
   res.status(StatusCodes.OK).json({
