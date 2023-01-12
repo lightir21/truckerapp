@@ -5,7 +5,8 @@ import { Dashboard, DriversDashboard } from "../pages";
 
 // axios
 const authFetch = axios.create({
-  baseURL: "/api/v1",
+  withCredentials: true,
+  baseURL: process.env.REACT_APP_SERVER_URL,
 });
 
 const AdminToggle = () => {
