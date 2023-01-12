@@ -59,7 +59,7 @@ const login = async (req, res) => {
 
   const token = user.createJWT();
 
-  res.cookie("token", token);
+  await res.cookie("token", token);
 
   user.password = undefined;
   res.status(StatusCodes.OK).json({
