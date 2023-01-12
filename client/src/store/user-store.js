@@ -5,7 +5,7 @@ import { addNewDriver } from "../service";
 
 // axios
 const authFetch = axios.create({
-  baseURL: "/api/v1",
+  baseURL: process.env.REACT_APP_SERVER_URL,
 });
 
 export const useUserStore = create(
