@@ -35,7 +35,7 @@ const AdminDriverAddMission = ({ setIsPopupOpen }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addNewMission(driver.user._id, values);
+    await addNewMission(values, driver.user._id);
     setIsPopupOpen(false);
     setValues(initialState);
   };
