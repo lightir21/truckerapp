@@ -1,7 +1,6 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 import axios from "axios";
-import { addNewDriver } from "../service";
 
 // axios
 const authFetch = axios.create({
@@ -67,7 +66,27 @@ export const useUserStore = create(
         set({ userData: {}, drivers: [], driver: {} });
       },
 
-      addNewDriver: addNewDriver,
+      addNewDriver: async (values) => {
+        const { name, lastName, password, repeatPassword, truckNum, image } =
+          values;
+
+        if (!name || !lastName || !password || !repeatPassword || !truckNum)
+          return;
+        if (truckNum.length < 7) return;
+
+        if (password !== repeatPassword) return;
+
+        const userName = `${name} ${lastName}`;
+
+        const { data } = await authFetch.post("/drivers", {
+          name,
+          lastName,
+          password,
+          truckNum,
+          userName,
+          image,
+        });
+      },
 
       getAllDrivers: async () => {
         const { data } = await authFetch.get("drivers");
