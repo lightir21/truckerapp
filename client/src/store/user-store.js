@@ -147,6 +147,7 @@ export const useUserStore = create(
       },
 
       updateMission: async ({ jobId }, values) => {
+        console.log(jobId);
         try {
           const updatedMission = await authFetch.patch("job", {
             jobId,
