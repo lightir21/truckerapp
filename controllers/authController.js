@@ -70,7 +70,7 @@ const login = async (req, res) => {
     httpOnly: true,
     sameSite: "None",
     secure: true,
-    expires: new Date(Date.now() + oneDay),
+    expire: new Date(Date.now() + oneDay),
   });
 
   user.password = undefined;
