@@ -18,6 +18,7 @@ export const useUserStore = create(
       editMission: {},
       loading: true,
       isEditing: true,
+      textToCopy: "",
 
       setIsEditing: (bool) => set({ isEditing: bool }),
 
@@ -59,7 +60,6 @@ export const useUserStore = create(
 
         data && set({ userData: data });
       },
-      updateUser: () => {},
 
       logoutUser: async () => {
         await authFetch.post("/auth/logout");
@@ -182,6 +182,16 @@ export const useUserStore = create(
         try {
           const { data } = await authFetch.patch("auth", values);
           set({ userData: data });
+        } catch (error) {
+          console.log(error);
+        }
+      },
+
+      copyText: async (list) => {
+        console.log(list);
+        try {
+          const text = list?.join("\r\n\r\n");
+          return await navigator.clipboard.writeText(text);
         } catch (error) {
           console.log(error);
         }
