@@ -26,11 +26,12 @@ const register = async (req, res) => {
   const user = await User.create({ userName, password, role });
   const token = user.createJWT();
 
-  const oneDay = 1000 * 60 * 60 * 24;
+  const oneDay = 1000 * 60 * 60 * 24 * 7;
   res.cookie("token", token, {
     httpOnly: true,
     sameSite: "None",
-    secure: true,
+    secure: false,
+    maxAge: oneDay,
     expires: new Date(Date.now() + oneDay),
   });
 
@@ -69,7 +70,8 @@ const login = async (req, res) => {
   res.cookie("token", token, {
     httpOnly: true,
     sameSite: "None",
-    secure: true,
+    maxAge: oneDay,
+    secure: false,
     expire: new Date(Date.now() + oneDay),
   });
 
