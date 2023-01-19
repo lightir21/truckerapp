@@ -188,7 +188,6 @@ export const useUserStore = create(
       },
 
       copyText: async (list) => {
-        console.log(list);
         try {
           const text = list?.join("\r\n\r\n");
           return await navigator.clipboard.writeText(text);

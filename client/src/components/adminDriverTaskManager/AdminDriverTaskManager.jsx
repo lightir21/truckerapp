@@ -11,7 +11,6 @@ const AdminDriverTaskManager = () => {
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isTruckNumEditing, setIsTruckNumEditing] = useState(false);
-  const [textToCopy, setTextToCopy] = useState([]);
 
   const params = useParams();
 

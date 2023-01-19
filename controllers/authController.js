@@ -30,7 +30,7 @@ const register = async (req, res) => {
   res.cookie("token", token, {
     httpOnly: true,
     sameSite: "None",
-    secure: false,
+    secure: true,
     maxAge: oneDay,
     expires: new Date(Date.now() + oneDay),
   });
@@ -71,7 +71,7 @@ const login = async (req, res) => {
     httpOnly: true,
     sameSite: "None",
     maxAge: oneDay,
-    secure: false,
+    secure: true,
     expire: new Date(Date.now() + oneDay),
   });
 
