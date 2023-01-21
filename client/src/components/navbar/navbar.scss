@@ -24,6 +24,10 @@
     flex: 1;
     display: flex;
     justify-content: flex-end;
+
+    @media (max-width: 400px) {
+      flex: 3;
+    }
   }
 
   &__profile {

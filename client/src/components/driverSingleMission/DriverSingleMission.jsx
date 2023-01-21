@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useMemo } from "react";
 
-const DriverSingleMission = ({ mission, setIsPopupOpen, text }) => {
+const DriverSingleMission = ({ mission, setIsPopupOpen, text, isDriver }) => {
   const { deleteMission, setIsEditing, setEditMission } = useUserStore();
 
   const { _id } = mission;
@@ -19,17 +19,18 @@ const DriverSingleMission = ({ mission, setIsPopupOpen, text }) => {
   return (
     <div className="driverSingleMission">
       <p>{text}</p>
-
-      <div className="driverSingleMission__iconsBox">
-        <FaEdit
-          className="driverSingleMission__icon"
-          onClick={handleUpdateMission}
-        />
-        <FaTrashAlt
-          className="driverSingleMission__icon"
-          onClick={() => deleteMission({ jobId: _id })}
-        />
-      </div>
+      {!isDriver && (
+        <div className="driverSingleMission__iconsBox">
+          <FaEdit
+            className="driverSingleMission__icon"
+            onClick={handleUpdateMission}
+          />
+          <FaTrashAlt
+            className="driverSingleMission__icon"
+            onClick={() => deleteMission({ jobId: _id })}
+          />
+        </div>
+      )}
     </div>
   );
 };

@@ -10,6 +10,7 @@ import {
   AddNewDriver,
   AdminDriverTaskManager,
   DriversList,
+  DriverTaskManager,
 } from "./components";
 import { useUserStore } from "./store/user-store";
 import React, { useEffect } from "react";
@@ -57,7 +58,9 @@ function App() {
               />
             }
           >
-            <Route path="driver" element={<DriversDashboard />} />
+            <Route path="driver" element={<DriversDashboard />}>
+              <Route index element={<DriverTaskManager />} />
+            </Route>
           </Route>
 
           <Route

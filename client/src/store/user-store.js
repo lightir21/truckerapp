@@ -131,6 +131,7 @@ export const useUserStore = create(
             date,
             driverId,
           });
+
           data && set({ missions: data });
         } catch (error) {}
       },

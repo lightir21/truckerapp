@@ -1,0 +1,23 @@
+.driverTaskManager {
+  text-align: center;
+  margin-top: 5rem;
+  color: var(--main-color);
+  padding: 0 2rem;
+
+  &__datePicker {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--main-color);
+    font-size: 2.4rem;
+  }
+
+  &__truckNum {
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+
+  &__missionsList {
+    overflow-y: scroll;
+    height: 72vh;
+  }
+}
