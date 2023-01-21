@@ -1,13 +1,13 @@
 import Dashboard from "./dashboard/Dashboard";
 import DriversDashboard from "./driversDashboard/DriversDashboard";
 import LandingPage from "./landingPage/LandingPage";
-import AdminProtectedRoute from "./AdminProtectedRoute";
+import ProtectedRoute from "./ProtectedRoute";
 import AdminProfile from "./adminProfile/AdminProfile";
 
 export {
   Dashboard,
   LandingPage,
-  AdminProtectedRoute,
+  ProtectedRoute,
   DriversDashboard,
   AdminProfile,
 };

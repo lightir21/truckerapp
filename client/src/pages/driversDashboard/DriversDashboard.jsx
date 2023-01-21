@@ -4,6 +4,7 @@ const DriversDashboard = () => {
   return (
     <div>
       <Navbar />
+      hello
     </div>
   );
 };

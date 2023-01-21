@@ -4,7 +4,7 @@ import { Register } from "../";
 import { useUserStore } from "../../store/user-store";
 import "./login.scss";
 
-const Login = ({ setLogin }) => {
+const Login = () => {
   const [registerClicked, setRegisteredClicked] = useState(false);
   const [values, setValues] = useState({
     userName: "",

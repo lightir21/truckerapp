@@ -164,7 +164,7 @@ const checkAdmin = async (req, res) => {
   if (user.role === "admin") {
     res.status(StatusCodes.OK).json({ isTrue: true });
   } else {
-    res.status(StatusCodes.UNAUTHORIZED).json({ isTrue: false });
+    res.status(201).json({ isTrue: false });
   }
 };
 

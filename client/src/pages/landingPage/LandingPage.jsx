@@ -5,7 +5,7 @@ import { Login } from "../../components/";
 import { useUserStore } from "../../store/user-store";
 import "./landingPage.scss";
 
-const LandingPage = ({ setLogin }) => {
+const LandingPage = ({ setLogin, userStatus }) => {
   const [enterClicked, setEnterClicked] = useState(false);
 
   const { userData } = useUserStore((state) => state);
@@ -14,7 +14,7 @@ const LandingPage = ({ setLogin }) => {
 
   useEffect(() => {
     if (userData?.user) {
-      navigate("/");
+      navigate(userStatus === 200 ? "/" : "/driver");
     }
   }, [userData, navigate]);
 

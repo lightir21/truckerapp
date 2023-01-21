@@ -47,7 +47,7 @@ const Navbar = () => {
                 onClick={() => setIsProfileOpen((prev) => !prev)}
               >
                 <RiArrowDownSFill />
-                <p className="navbar__profile-button-text">{user.userName}</p>
+                <p className="navbar__profile-button-text">{user?.userName}</p>
               </div>
               <div>
                 <div className={`profileDropdown ${isProfileOpen && "active"}`}>
@@ -68,7 +68,9 @@ const Navbar = () => {
                           ? "profileDropdown__links show"
                           : undefined
                       }
-                      onClick={logoutUser}
+                      onClick={() => {
+                        logoutUser();
+                      }}
                     >
                       התנתק
                     </li>
@@ -76,9 +78,9 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
-            {(user.image && (
+            {(user?.image && (
               <img
-                src={user.image}
+                src={user?.image}
                 alt="profile of"
                 className="navbar__profile-image"
               />

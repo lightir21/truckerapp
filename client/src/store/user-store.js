@@ -1,6 +1,7 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 // axios
 const authFetch = axios.create({
@@ -191,6 +192,15 @@ export const useUserStore = create(
         try {
           const text = list?.join("\r\n\r\n");
           return await navigator.clipboard.writeText(text);
+        } catch (error) {
+          console.log(error);
+        }
+      },
+
+      checkAuth: async () => {
+        try {
+          const { status } = await authFetch.post("/auth/checkAuth");
+          return status;
         } catch (error) {
           console.log(error);
         }
