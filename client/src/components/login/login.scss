@@ -8,6 +8,13 @@
   flex-direction: column;
   justify-content: center;
 
+  @media (max-width: 414px) {
+    min-width: 100%;
+    justify-content: flex-start;
+    margin-right: 0;
+    text-align: center;
+  }
+
   &__form {
     width: 40%;
 
@@ -15,6 +22,10 @@
     flex-direction: column;
     gap: 3rem;
     align-items: center;
+
+    @media (max-width: 414px) {
+      width: 100%;
+    }
 
     h2 {
       font-size: 4.8rem;
@@ -39,12 +50,20 @@
       flex-direction: column;
       gap: 1rem;
       align-self: stretch;
+
+      @media (max-width: 414px) {
+        margin-top: 5rem;
+      }
     }
 
     &-btn {
       padding: 0.6rem 0;
       align-self: stretch;
       font-size: 3.2rem;
+
+      @media (max-width: 414px) {
+        color: #fff;
+      }
     }
   }
 }

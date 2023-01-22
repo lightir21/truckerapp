@@ -21,8 +21,9 @@ const DriverTaskManager = () => {
         onChange={(e) => setDate(e.target.value)}
       />
       <p className="driverTaskManager__truckNum">
-        מספר משאית: {userData.user.truckNum}
+        מספר משאית: {userData?.user?.truckNum}
       </p>
+      <hr />
       <div className="driverTaskManager__missionsList">
         {missions?.map((mission) => {
           const {
