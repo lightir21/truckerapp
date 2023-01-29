@@ -31,7 +31,7 @@ const AdminDriverTaskManager = () => {
   }, []);
 
   useEffect(() => {
-    if (!date && !params.id) return;
+    if (!date || !params.id) return;
     !isPopupOpen && getMissionByDate(date, driver?.user?._id);
   }, [date, driver, getMissionByDate, isPopupOpen]);
 
