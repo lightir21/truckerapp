@@ -37,7 +37,7 @@ function App() {
           <Route
             element={
               <ProtectedRoute
-                userStatus={userStatus ? userStatus : ""}
+                userStatus={userStatus && userStatus}
                 allowedRole={200}
               />
             }
@@ -53,7 +53,7 @@ function App() {
           <Route
             element={
               <ProtectedRoute
-                userStatus={userStatus ? userStatus : ""}
+                userStatus={userStatus && userStatus}
                 allowedRole={201}
               />
             }

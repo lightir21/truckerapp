@@ -27,7 +27,7 @@ const AdminDriverTaskManager = () => {
   const [truckNum, setTruckNum] = useState(driver?.user?.truckNum);
 
   useEffect(() => {
-    getDriver(params.id);
+    if (date && params.id) getDriver(params.id);
   }, []);
 
   useEffect(() => {
