@@ -18,7 +18,7 @@ export const useUserStore = create(
       missions: [],
       editMission: {},
       loading: true,
-      isEditing: true,
+      isEditing: false,
       textToCopy: "",
 
       setIsEditing: (bool) => set({ isEditing: bool }),
