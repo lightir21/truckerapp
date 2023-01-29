@@ -52,7 +52,7 @@ const AdminProfile = () => {
               <img
                 className="adminProfile__img"
                 src={previewSource || user?.image || defaultProfileImage}
-                alt={`profile of ${user.name}`}
+                alt={`profile of ${user?.name}`}
               />
             </label>
             <input
