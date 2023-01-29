@@ -27,10 +27,11 @@ const AdminDriverTaskManager = () => {
   const [truckNum, setTruckNum] = useState(driver?.user?.truckNum);
 
   useEffect(() => {
-    if (date && params.id) getDriver(params.id);
+    getDriver(params.id);
   }, []);
 
   useEffect(() => {
+    if (!date && !params.id) return;
     !isPopupOpen && getMissionByDate(date, driver?.user?._id);
   }, [date, driver, getMissionByDate, isPopupOpen]);
 
