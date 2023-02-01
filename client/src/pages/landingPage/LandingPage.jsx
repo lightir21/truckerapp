@@ -20,6 +20,7 @@ const LandingPage = ({ setLogin, userStatus }) => {
 
   return (
     <div className="landingPage">
+      <p>It might take 30 seconds to load the server before logging in</p>
       {enterClicked ? (
         <Login setLogin={setLogin} />
       ) : (

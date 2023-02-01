@@ -7,6 +7,13 @@
   background-size: cover;
   background-position: center;
 
+  p {
+    text-align: center;
+    padding-top: 5rem;
+    font-size: 1.6rem;
+    color: rgb(92, 11, 11);
+  }
+
   &__intro {
     padding: 2rem;
     width: 40%;
