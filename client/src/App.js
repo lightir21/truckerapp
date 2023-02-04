@@ -5,12 +5,14 @@ import {
   Dashboard,
   DriversDashboard,
 } from "./pages";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   AddNewDriver,
   AdminDriverTaskManager,
   DriversList,
   DriverTaskManager,
+  ErrorPage,
+  LoadingSpinner,
 } from "./components";
 import { useUserStore } from "./store/user-store";
 import React, { useEffect } from "react";
@@ -18,18 +20,24 @@ import { useState } from "react";
 
 function App() {
   const [userStatus, setUserStatus] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { checkAuth, userData } = useUserStore();
 
   useEffect(() => {
     const adminStatusSetter = async () => {
       if (userData?.user) {
+        setLoading(true);
         const status = await checkAuth();
         setUserStatus(status);
+        setLoading(false);
       }
     };
     adminStatusSetter();
   }, [userData]);
 
+  if (loading) {
+    return <LoadingSpinner />;
+  }
   return (
     <div>
       <BrowserRouter>
@@ -67,6 +75,7 @@ function App() {
             path="landing"
             element={<LandingPage userStatus={userStatus} />}
           />
+          <Route exact={true} path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -5,7 +5,11 @@ import { FaEdit, FaCheck } from "react-icons/fa";
 import defaultProfileImage from "../../assets/Demo-profile-picture.png";
 import { useEffect, useState } from "react";
 import { useUserStore } from "../../store/user-store";
-import { AdminDriverAddMission, DriverSingleMission } from "../index";
+import {
+  AdminDriverAddMission,
+  DriverSingleMission,
+  LoadingSpinner,
+} from "../index";
 
 const AdminDriverTaskManager = () => {
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
@@ -41,7 +45,7 @@ const AdminDriverTaskManager = () => {
   };
 
   if (loading) {
-    return <h1>loading...</h1>;
+    return <LoadingSpinner />;
   }
 
   let listToCopy = [];
