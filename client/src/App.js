@@ -21,13 +21,17 @@ import { useState } from "react";
 function App() {
   const [userStatus, setUserStatus] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { checkAuth, userData } = useUserStore();
+  const { checkAuth, userData, logoutUser } = useUserStore();
 
   useEffect(() => {
     const adminStatusSetter = async () => {
       if (userData?.user) {
         setLoading(true);
         const status = await checkAuth();
+
+        if (status === undefined) {
+          logoutUser();
+        }
         setUserStatus(status);
         setLoading(false);
       }
@@ -75,7 +79,7 @@ function App() {
             path="landing"
             element={<LandingPage userStatus={userStatus} />}
           />
-          <Route exact={true} path="*" element={<ErrorPage />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
     </div>
