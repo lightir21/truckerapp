@@ -5,7 +5,7 @@
 this project was built specially for my father who came to me and asked for a simple way to assign mission for his truck drivers.
 
 it was built with:
-* React for the front end side of things in order to organize the code with simple and scalable compenontes.
+* React for the front end side of things in order to organize the code with simple and scalable components.
 * Zustand for state management of the app.
 * Scss in order to style the project with the ease of BEM methodology
 * Node.js, Express & MongoDB in order to create an api and apply simple CRUD operations
