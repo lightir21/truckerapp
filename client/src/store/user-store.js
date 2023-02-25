@@ -203,7 +203,11 @@ export const useUserStore = create(
           const { status } = await authFetch.post("/auth/checkAuth");
           return status;
         } catch (error) {
-          console.log(error);
+          if (error.response.data.msg === "No token found") {
+            get().logoutUser();
+          } else {
+            console.log(error);
+          }
         }
       },
     }),
