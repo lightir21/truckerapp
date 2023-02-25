@@ -146,7 +146,7 @@ const updateAdminInfo = async (req, res) => {
 
 const checkAdmin = async (req, res) => {
   const token = req.cookies.token;
-
+  console.log(token);
   if (!token) {
     throw new BadRequestError("No token found");
   }
