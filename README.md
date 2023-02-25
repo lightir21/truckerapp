@@ -4,6 +4,8 @@
 
 this project was built specially for my father who came to me and asked for a simple way to assign mission for his truck drivers.
 
+In this project I learned how to use JWT and also store it inside cookies in order to retrive the user info on the backend, and i learned on how to use a new state management system called zustand.
+
 it was built with:
 * React for the front end side of things in order to organize the code with simple and scalable components.
 * Zustand for state management of the app.
@@ -15,4 +17,7 @@ https://user-images.githubusercontent.com/84183323/220087305-bbd9c35d-7c7e-47e3-
 
 ### and a live preview here:
 (Please note! because it is a free server hosting it may take 15 seconds to firstly login so please be patient)
+Credentials:
+userName: meir
+password: 123123
 https://trucker-app-virid.vercel.app/landing
