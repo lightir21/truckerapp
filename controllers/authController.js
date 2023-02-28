@@ -68,7 +68,7 @@ const login = async (req, res) => {
 
   const oneDay = 1000 * 60 * 60 * 24 * 7;
   res.cookie("token", token, {
-    httpOnly: false,
+    httpOnly: true,
     sameSite: "None",
     maxAge: oneDay,
     secure: true,
@@ -146,7 +146,7 @@ const updateAdminInfo = async (req, res) => {
 
 const checkAdmin = async (req, res) => {
   const token = req.cookies.token;
-  console.log(token);
+
   if (!token) {
     throw new BadRequestError("No token found");
   }

@@ -200,6 +200,8 @@ export const useUserStore = create(
 
       checkAuth: async () => {
         try {
+          const loading = get().loading;
+          if (loading) return;
           const { status } = await authFetch.post("/auth/checkAuth");
           return status;
         } catch (error) {
