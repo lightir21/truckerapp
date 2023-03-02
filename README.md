@@ -20,4 +20,4 @@ https://user-images.githubusercontent.com/84183323/220087305-bbd9c35d-7c7e-47e3-
 Credentials:
 userName: meir
 password: 123123
-https://trucker-app-virid.vercel.app/landing
+https://trucker-app.onrender.com/
