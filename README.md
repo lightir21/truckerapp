@@ -16,8 +16,13 @@ it was built with:
 https://user-images.githubusercontent.com/84183323/220087305-bbd9c35d-7c7e-47e3-a0d1-ecde4ef5cc4e.mp4
 
 ### and a live preview here:
-(Please note! because it is a free server hosting it may take 15 seconds to firstly login so please be patient)
 Credentials:
-userName: meir
-password: 123123
-https://trucker-app.onrender.com/
+Admin:
+UserName: meir
+Password: 123123
+
+Driver:
+UserName: גידי גוב
+Password: 123123
+
+https://truckerapp-production.up.railway.app/
