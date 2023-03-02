@@ -1,7 +1,6 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 // axios
 const authFetch = axios.create({
