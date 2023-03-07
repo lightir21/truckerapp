@@ -3,7 +3,7 @@ import { persist } from "zustand/middleware";
 import axios from "axios";
 
 // axios
-const authFetch = axios.create({
+const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL,
   withCredentials: true,
 });
@@ -34,7 +34,7 @@ export const useUserStore = create(
         const { userName, password } = values;
 
         if (!password || !userName) return;
-        const { data } = await authFetch.post("/auth/login", {
+        const { data } = await axiosInstance.post("/auth/login", {
           userName,
           password,
         });
@@ -49,7 +49,7 @@ export const useUserStore = create(
 
         if (password !== repeatPassword) return;
 
-        const { data } = await authFetch.post("/auth/register", {
+        const { data } = await axiosInstance.post("/auth/register", {
           userName,
           password,
           adminPassword,
@@ -62,7 +62,7 @@ export const useUserStore = create(
       },
 
       logoutUser: async () => {
-        await authFetch.post("/auth/logout");
+        await axiosInstance.post("/auth/logout");
         set({ userData: {}, drivers: [], driver: {} });
       },
 
@@ -78,7 +78,7 @@ export const useUserStore = create(
 
         const userName = `${name} ${lastName}`;
 
-        const { data } = await authFetch.post("/drivers", {
+        const { data } = await axiosInstance.post("/drivers", {
           name,
           lastName,
           password,
@@ -89,14 +89,14 @@ export const useUserStore = create(
       },
 
       getAllDrivers: async () => {
-        const { data } = await authFetch.get("drivers");
+        const { data } = await axiosInstance.get("drivers");
 
         data && set({ drivers: data.drivers });
       },
 
       getDriver: async (userId) => {
         set({ loading: true });
-        const { data } = await authFetch.get(`drivers/${userId}`);
+        const { data } = await axiosInstance.get(`drivers/${userId}`);
         data && set({ driver: data });
         set({ loading: false });
       },
@@ -104,7 +104,7 @@ export const useUserStore = create(
       uploadProfileImg: async (file) => {
         // const stringifiedFile = JSON.stringify(file);
         try {
-          const { data } = await authFetch.patch("/auth/uploadImage", {
+          const { data } = await axiosInstance.patch("/auth/uploadImage", {
             data: file,
           });
           data && set({ userData: data });
@@ -115,7 +115,7 @@ export const useUserStore = create(
 
       addNewMission: async (values, driverId) => {
         try {
-          await authFetch.post("job", {
+          await axiosInstance.post("job", {
             ...values,
             createdFor: driverId,
           });
@@ -126,7 +126,7 @@ export const useUserStore = create(
 
       getMissionByDate: async (date, driverId) => {
         try {
-          const { data } = await authFetch.post("job/getJobs", {
+          const { data } = await axiosInstance.post("job/getJobs", {
             date,
             driverId,
           });
@@ -137,7 +137,7 @@ export const useUserStore = create(
 
       deleteMission: async ({ jobId }) => {
         try {
-          await authFetch.delete("job", { data: { jobId } });
+          await axiosInstance.delete("job", { data: { jobId } });
 
           set((state) => ({
             missions: state.missions.filter((mission) => mission._id !== jobId),
@@ -149,7 +149,7 @@ export const useUserStore = create(
 
       updateMission: async ({ jobId }, values) => {
         try {
-          const updatedMission = await authFetch.patch("job", {
+          const updatedMission = await axiosInstance.patch("job", {
             jobId,
             ...values,
           });
@@ -169,7 +169,7 @@ export const useUserStore = create(
 
       updateTruckNum: async (driverId, truckNum) => {
         try {
-          const { data } = await authFetch.patch(`drivers/${driverId}`, {
+          const { data } = await axiosInstance.patch(`drivers/${driverId}`, {
             truckNum,
           });
 
@@ -181,7 +181,7 @@ export const useUserStore = create(
 
       updateAdminInfo: async (values) => {
         try {
-          const { data } = await authFetch.patch("auth", values);
+          const { data } = await axiosInstance.patch("auth", values);
           set({ userData: data });
         } catch (error) {
           console.log(error);
@@ -199,7 +199,7 @@ export const useUserStore = create(
 
       checkAuth: async () => {
         try {
-          const { status } = await authFetch.post("/auth/checkAuth");
+          const { status } = await axiosInstance.post("/auth/checkAuth");
           return status;
         } catch (error) {
           if (error.response.data.msg === "No token found") {
