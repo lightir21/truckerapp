@@ -17,6 +17,8 @@ import {
 import { useUserStore } from "./store/user-store";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [userStatus, setUserStatus] = useState(null);
@@ -81,6 +83,11 @@ function App() {
           />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
+        <ToastContainer
+          position="top-center"
+          rtl={true}
+          style={{ fontSize: "2rem" }}
+        />
       </BrowserRouter>
     </div>
   );

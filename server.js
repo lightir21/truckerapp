@@ -23,12 +23,13 @@ import jobRouter from "./routes/jobRoutes.js";
 import notFoundMiddleware from "./middleware/not-found.js";
 import errorHandlerMiddleware from "./middleware/error-handler.js";
 
-// app.use(
-//   cors({
-//     origin: process.env.CLIENT_URL,
-//     credentials: true,
-//   })
-// );
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  })
+);
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 app.use(express.static(path.resolve(__dirname, "./client/build")));

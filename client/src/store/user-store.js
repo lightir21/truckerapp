@@ -1,6 +1,7 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 // axios
 const axiosInstance = axios.create({
@@ -31,34 +32,52 @@ export const useUserStore = create(
       },
 
       signIn: async (values) => {
-        const { userName, password } = values;
+        try {
+          const { userName, password } = values;
 
-        if (!password || !userName) return;
-        const { data } = await axiosInstance.post("/auth/login", {
-          userName,
-          password,
-        });
+          if (!password || !userName) return toast.error("אנא מלא את כל השדות");
+          const { data } = await axiosInstance.post("/auth/login", {
+            userName,
+            password,
+          });
 
-        data && set({ userData: data });
+          data && set({ userData: data });
+        } catch (error) {
+          toast.error("אחד או כל הנתונים שהזנת אינם נכונים");
+        }
       },
 
       signUp: async (values) => {
-        const { userName, password, repeatPassword, adminPassword } = values;
+        try {
+          const { userName, password, repeatPassword, adminPassword } = values;
 
-        if (!userName || !password || !repeatPassword || !adminPassword) return;
+          if (!userName || !password || !repeatPassword || !adminPassword)
+            return toast.error("אנא מלא את כל השדות");
 
-        if (password !== repeatPassword) return;
+          if (password !== repeatPassword)
+            return toast.error("הסיסמאות אינן תואמות");
 
-        const { data } = await axiosInstance.post("/auth/register", {
-          userName,
-          password,
-          adminPassword,
-          role: "admin",
-        });
+          const { data } = await axiosInstance.post("/auth/register", {
+            userName,
+            password,
+            adminPassword,
+            role: "admin",
+          });
 
-        data.user.role = undefined;
+          data.user.role = undefined;
 
-        data && set({ userData: data });
+          data && set({ userData: data });
+        } catch (error) {
+          console.log(error.response.data.msg);
+          if (
+            error.response.data.msg === "Please provide correct admin password"
+          ) {
+            toast.error("סיסמת מנהל אינה תואמת");
+          }
+          if (error.response.data.msg === "UserName already in use") {
+            toast.error("שם המשתמש כבר רשום");
+          }
+        }
       },
 
       logoutUser: async () => {
